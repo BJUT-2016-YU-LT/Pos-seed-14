@@ -1,7 +1,7 @@
 package com.company;
 
 /**
- * Created by Terryblade on 2016/6/20.
+ * Created by Terryblade on 2016/6/25.
  */
 public class Item {
     private String barcode;
@@ -9,6 +9,7 @@ public class Item {
     private String unit;
     private double price;
     private double discount;
+    private  boolean promotion;
     public Item() {
 
     }
@@ -25,6 +26,10 @@ public class Item {
         this.setDiscount(discount);
     }
 
+    public Item(String barcode, String name, String unit, double price, boolean promotion) {
+        this(barcode, name, unit, price);
+        this.setPromotion(promotion);
+    }
 
     public String getName() {
         return name;
@@ -45,6 +50,7 @@ public class Item {
         return discount;
     }
 
+    public boolean getPromotion(){return promotion;}
 
     public void setBarcode(String barcode) {
         this.barcode = barcode;
@@ -66,4 +72,5 @@ public class Item {
         this.discount = discount;
     }
 
+    public void setPromotion(boolean promotion){this.promotion=promotion;}
 }

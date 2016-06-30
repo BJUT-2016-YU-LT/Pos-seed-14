@@ -3,13 +3,14 @@ package com.company;
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
-        double dr=0.8;
-        double dr2=1-dr;
-        System.out.println(dr2);
-//        Pos p=new Pos("fixture/123.txt");
-//        ReadList readList=new ReadList(p);
-//
-//        System.out.println(readList.GetDisplay());
+//        String ss="abc中国";
+//        System.out.println(ss.charAt(0)+ss.charAt(1));
+        String arg1="fixture/1234.txt";
+        String arg2="fixture/123.txt";
+        ItemList s=new ItemList(arg1);
+        Pos p=new Pos(arg2);
+        ReadList rd=new ReadList(p,s);
+        //rd.Display();
+        System.out.println(rd.GetDisplay());
     }
 }

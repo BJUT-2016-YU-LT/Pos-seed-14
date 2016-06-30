@@ -14,17 +14,19 @@ import static org.junit.Assert.assertThat;
 * ReadList Tester. 
 * 
 * @author <Authors name> 
-* @since <pre>���� 30, 2016</pre> 
+* @since <pre>���� 27, 2016</pre> 
 * @version 1.0 
 */ 
 public class ReadListTest { 
 
 @Before
-public void before() throws Exception { 
+public void before() throws Exception {
+    System.out.println("before");
 } 
 
 @After
-public void after() throws Exception { 
+public void after() throws Exception {
+    System.out.println("after");
 } 
 
 /** 
@@ -35,11 +37,12 @@ public void after() throws Exception {
 @Test
 public void testGetTotal() throws Exception { 
 //TODO: Test goes here...
-    String arg1="fixture/123.txt";
-    Pos p=new Pos(arg1);
-    ReadList rd=new ReadList(p);
-    double total=22.60;
-    assertThat(rd.GetTotal(), is(total));
+    String arg1="fixture/1234.txt";
+    String arg2="fixture/123.txt";
+    ItemList s=new ItemList(arg1);
+    Pos p=new Pos(arg2);
+    ReadList rd=new ReadList(p,s);
+    System.out.println(rd.GetTotal());
 } 
 
 /** 
@@ -50,41 +53,37 @@ public void testGetTotal() throws Exception {
 @Test
 public void testGetSave() throws Exception { 
 //TODO: Test goes here...
-    String arg1="fixture/123.txt";
-    Pos p=new Pos(arg1);
-    ReadList rd=new ReadList(p);
-    double rdr=rd.GetSave();
-    double save=0.4+1-1;
-    assertThat(rd.GetSave(), is(save));
+    String arg1="fixture/1234.txt";
+    String arg2="fixture/123.txt";
+    ItemList s=new ItemList(arg1);
+    Pos p=new Pos(arg2);
+    ReadList rd=new ReadList(p,s);
+    System.out.println(rd.GetSave());
 } 
 
 /** 
 * 
-* Method: GetDisplay() 
+* Method: Display() 
 * 
-*/
-
+*/ 
 @Test
-public void testDisplay(){
-    String arg1="fixture/123.txt";
-    Pos p=new Pos(arg1);
-    ReadList rd=new ReadList(p);
-    String expectedShoppingList =
-            "***商店购物清单***\n"
-                    + "名称:可口可乐,数量:5瓶,单价:3.00(元),小计:15.00(元)\n"
-                    + "名称:雪碧,数量:2瓶,单价:3.00(元),小计:6.00(元)\n"
-                    + "----------------------\n"
-                    + "总计:21.00(元)\n"
-                    + "**********************\n";
-    assertThat(rd.GetDisplay(), is(expectedShoppingList));
+public void testDisplay() throws Exception { 
+//TODO: Test goes here...
+    String arg1="fixture/1234.txt";
+    String arg2="fixture/123.txt";
+    ItemList s=new ItemList(arg1);
+    Pos p=new Pos(arg2);
+    ReadList rd=new ReadList(p,s);
+    rd.Display();
 }
 
 @Test
-public void testGetCorrectShoppingListWithOneItem() throws Exception {
-//TODO: Test goes here...
-    String arg1="fixture/OneItem.txt";
-    Pos p=new Pos(arg1);
-    ReadList rd=new ReadList(p);
+public void testGetCorrectReadListWithOneSingleItem() throws Exception{
+    String arg1="fixture/OneSingle.txt";
+    String arg2="fixture/OneSingleItemIme.txt";
+    ItemList s=new ItemList(arg1);
+    Pos p=new Pos(arg2);
+    ReadList rd=new ReadList(p,s);
     String expectedShoppingList =
             "***商店购物清单***\n"
                     + "名称:可口可乐,数量:1瓶,单价:3.00(元),小计:3.00(元)\n"
@@ -95,11 +94,12 @@ public void testGetCorrectShoppingListWithOneItem() throws Exception {
 }
 
     @Test
-    public void testGetCorrectShoppingListWithTwoItem() throws Exception {
-//TODO: Test goes here...
-        String arg1="fixture/TwoItem.txt";
-        Pos p=new Pos(arg1);
-        ReadList rd=new ReadList(p);
+    public void testGetCorrectReadListWithTwoSameItem() throws Exception{
+        String arg1="fixture/TwoSame.txt";
+        String arg2="fixture/TwoSameItemIme.txt";
+        ItemList s=new ItemList(arg1);
+        Pos p=new Pos(arg2);
+        ReadList rd=new ReadList(p,s);
         String expectedShoppingList =
                 "***商店购物清单***\n"
                         + "名称:可口可乐,数量:2瓶,单价:3.00(元),小计:6.00(元)\n"
@@ -110,11 +110,13 @@ public void testGetCorrectShoppingListWithOneItem() throws Exception {
     }
 
     @Test
-    public void testGetCorrectShoppingListWithTwoDifferentItem() throws Exception {
-//TODO: Test goes here...
-        String arg1="fixture/TwoDifferentItem.txt";
-        Pos p=new Pos(arg1);
-        ReadList rd=new ReadList(p);
+    public void testGetCorrectReadListWithTwoDifferentItem() throws Exception{
+        String arg1="fixture/TwoDifferent.txt";
+        String arg2="fixture/TwoDifferentItemIme.txt";
+        ItemList s=new ItemList(arg1);
+        Pos p=new Pos(arg2);
+        ReadList rd=new ReadList(p,s);
+        // then
         String expectedShoppingList =
                 "***商店购物清单***\n"
                         + "名称:可口可乐,数量:1瓶,单价:3.00(元),小计:3.00(元)\n"
@@ -126,51 +128,94 @@ public void testGetCorrectShoppingListWithOneItem() throws Exception {
     }
 
     @Test
-    public void testGetCorrectShoppingListWithOneItemWithDiscount() throws Exception {
-//TODO: Test goes here...
-        String arg1="fixture/OneItemWithDiscount.txt";
-        Pos p=new Pos(arg1);
-        ReadList rd=new ReadList(p);
+    public void testGetCorrectReadListWithThreeItemsInTwoDifferentItem() throws Exception{
+        String arg1="fixture/TwoDifferent.txt";
+        String arg2="fixture/TwoDifferentItemImeWithThreeItems.txt";
+        ItemList s=new ItemList(arg1);
+        Pos p=new Pos(arg2);
+        ReadList rd=new ReadList(p,s);
         String expectedShoppingList =
                 "***商店购物清单***\n"
-                        + "名称:电池,数量:1个,单价:2.00(元),小计:1.60(元)\n"
+                        + "名称:可口可乐,数量:2瓶,单价:3.00(元),小计:6.00(元)\n"
+                        + "名称:雪碧,数量:1瓶,单价:3.00(元),小计:3.00(元)\n"
                         + "----------------------\n"
-                        + "总计:1.60(元)\n"
-                        + "节省:0.40元\n"
+                        + "总计:9.00(元)\n"
                         + "**********************\n";
         assertThat(rd.GetDisplay(), is(expectedShoppingList));
     }
 
     @Test
-    public void testGetCorrectShoppingListWithTwoItemWithDiscount() throws Exception {
-//TODO: Test goes here...
-        String arg1="fixture/TwoItemWithDiscount.txt";
-        Pos p=new Pos(arg1);
-        ReadList rd=new ReadList(p);
+    public void testGetCorrectReadListWithFourItemsInTwoDifferentItem() throws Exception{
+        String arg1="fixture/TwoDifferent.txt";
+        String arg2="fixture/TwoDifferentItemImeWithFourItems.txt";
+        ItemList s=new ItemList(arg1);
+        Pos p=new Pos(arg2);
+        ReadList rd=new ReadList(p,s);
         String expectedShoppingList =
                 "***商店购物清单***\n"
-                        + "名称:电池,数量:2个,单价:2.00(元),小计:3.20(元)\n"
+                        + "名称:可口可乐,数量:2瓶,单价:3.00(元),小计:6.00(元)\n"
+                        + "名称:雪碧,数量:2瓶,单价:3.00(元),小计:6.00(元)\n"
                         + "----------------------\n"
-                        + "总计:3.20(元)\n"
-                        + "节省:0.80元\n"
+                        + "总计:12.00(元)\n"
                         + "**********************\n";
         assertThat(rd.GetDisplay(), is(expectedShoppingList));
     }
 
     @Test
-    public void testGetCorrectShoppingListWithTwoItemWithOneDiscount() throws Exception {
-//TODO: Test goes here...
-        String arg1="fixture/TwoItemWithOneDiscount.txt";
-        Pos p=new Pos(arg1);
-        ReadList rd=new ReadList(p);
+    public void testGetCorrectShoppingListWhenDifferentItemHaveSameItemName() throws  Exception{
+        String arg1="fixture/TwoDifferentItemWithSameName.txt";
+        String arg2="fixture/TwoDifferentItemWithSameNameIme.txt";
+        ItemList s=new ItemList(arg1);
+        Pos p=new Pos(arg2);
+        ReadList rd=new ReadList(p,s);
         String expectedShoppingList =
                 "***商店购物清单***\n"
-                        + "名称:电池,数量:1个,单价:2.00(元),小计:1.60(元)\n"
                         + "名称:可口可乐,数量:1瓶,单价:3.00(元),小计:3.00(元)\n"
+                        + "名称:可口可乐,数量:1瓶,单价:2.00(元),小计:2.00(元)\n"
                         + "----------------------\n"
-                        + "总计:4.60(元)\n"
-                        + "节省:0.40元\n"
+                        + "总计:5.00(元)\n"
                         + "**********************\n";
         assertThat(rd.GetDisplay(), is(expectedShoppingList));
     }
-} 
+
+    @Test
+    public void testGetCorrectShoppingListThreeSameItem() throws Exception{
+        String arg1="fixture/OneSingle.txt";
+        String arg2="fixture/ThreeSameItemIme.txt";
+        ItemList s=new ItemList(arg1);
+        Pos p=new Pos(arg2);
+        ReadList rd=new ReadList(p,s);
+        String expectedShoppingList =
+                "***商店购物清单***\n"
+                        + "名称:可口可乐,数量:3瓶,单价:3.00(元),小计:6.00(元)\n"
+                        + "----------------------\n"
+                        + "挥泪赠送商品:可口可乐,数量:1瓶\n"
+                        + "----------------------\n"
+                        + "总计:6.00(元)\n"
+                        + "节省:3.0元\n"
+                        + "**********************\n";
+        assertThat(rd.GetDisplay(), is(expectedShoppingList));
+    }
+
+    @Test
+    public void testGetCorrectShoppingListSixDifferentItemInTwoItemImes() throws Exception{
+        String arg1="fixture/TwoDifferent.txt";
+        String arg2="fixture/SixDifferentItemIme.txt";
+        ItemList s=new ItemList(arg1);
+        Pos p=new Pos(arg2);
+        ReadList rd=new ReadList(p,s);
+        String expectedShoppingList =
+                "***商店购物清单***\n"
+                        + "名称:可口可乐,数量:3瓶,单价:3.00(元),小计:6.00(元)\n"
+                        + "名称:雪碧,数量:3瓶,单价:3.00(元),小计:6.00(元)\n"
+                        + "----------------------\n"
+                        + "挥泪赠送商品:可口可乐,数量:1瓶\n"
+                        + "----------------------\n"
+                        + "挥泪赠送商品:雪碧,数量:1瓶\n"
+                        + "----------------------\n"
+                        + "总计:12.00(元)\n"
+                        + "节省:6.0元\n"
+                        + "**********************\n";
+        assertThat(rd.GetDisplay(), is(expectedShoppingList));
+    }
+}

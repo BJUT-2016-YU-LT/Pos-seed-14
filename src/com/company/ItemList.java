@@ -54,6 +54,10 @@ public class ItemList {
                                     s1=s.substring(s.indexOf(":")+1);
                                     it.setPromotion(Boolean.parseBoolean(s1));
                                     break;
+                                case "vip":
+                                    s1=s.substring(s.indexOf(":")+1);
+                                    it.setVipdiscount(Double.parseDouble(s1));
+                                    it.setIsvipitem(true);
                             }
                         }vs.add(it);
                 }
@@ -110,5 +114,52 @@ public class ItemList {
         }
         return result;
     }
+
+    public double VipSutatol(){
+        double result=0;
+        if(vs.get(0).getPromotion()==false) {
+            for (Item it : vs) {
+                result += it.getPrice() * it.getDiscount()*it.getVipdiscount();
+            }
+        }
+        if(vs.get(0).getPromotion()==true){
+            if(vs.size()>2) {
+                for (Item it : vs) {
+                    result += it.getPrice();
+                }
+                result -= vs.get(0).getPrice();
+            }
+            else{
+                if(vs.size()==1)
+                {result+=vs.get(0).getPrice();}
+                else{
+                    result+=vs.get(0).getPrice();
+                    result+=vs.get(0).getPrice();
+                }
+            }
+        }
+        return result;
+    }
+
+    public double VipSave(){
+        double result=0.00;
+        if(vs.get(0).getPromotion()==false) {
+            for (Item it : vs) {
+                result += (it.getPrice() * (1 - it.getDiscount())+it.getPrice()*it.getDiscount()*(1-it.getVipdiscount()));
+            }
+        }
+        if(vs.get(0).getPromotion()==true){
+            if(vs.size()>2){
+                result=vs.get(0).getPrice();
+            }
+            else{
+                result=0;
+            }
+        }
+
+        return result;
+    }
+
+
 
 }

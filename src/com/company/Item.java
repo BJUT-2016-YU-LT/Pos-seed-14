@@ -10,6 +10,8 @@ public class Item {
     private double price;
     private double discount;
     private  boolean promotion;
+    private double vipdiscount;
+    private boolean isvipitem;
     public Item() {
 
     }
@@ -29,6 +31,16 @@ public class Item {
     public Item(String barcode, String name, String unit, double price, boolean promotion) {
         this(barcode, name, unit, price);
         this.setPromotion(promotion);
+    }
+
+    public Item(String barcode,String name,String unit, double price,boolean promotion,double vipdiscount){
+        this(barcode, name, unit, price, promotion);
+        this.setVipdiscount(vipdiscount);
+    }
+
+    public Item(String barcode,String name,String unit, double price,boolean promotion,double vipdiscount,boolean isvipitem){
+        this(barcode, name, unit, price, promotion,vipdiscount);
+        this.setIsvipitem(isvipitem);
     }
 
     public String getName() {
@@ -52,6 +64,15 @@ public class Item {
 
     public boolean getPromotion(){return promotion;}
 
+    public double getVipdiscount(){
+        if(vipdiscount==0.00){
+            return 1.00;
+        }
+        return vipdiscount;
+    }
+
+    public boolean getIsVipItem(){return isvipitem;}
+
     public void setBarcode(String barcode) {
         this.barcode = barcode;
     }
@@ -73,4 +94,8 @@ public class Item {
     }
 
     public void setPromotion(boolean promotion){this.promotion=promotion;}
+
+    public void setVipdiscount(double vipdiscount){this.vipdiscount=vipdiscount;}
+
+    public void setIsvipitem(boolean isvipitem){this.isvipitem=isvipitem;}
 }

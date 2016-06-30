@@ -1,0 +1,39 @@
+﻿{
+    'USER0001': {
+        "name": 'USER 001',
+        "isVip": true 
+    },
+    'USER0002': {
+        "name": 'USER 002',
+        "isVip": false
+    },
+    'USER0003': {
+        "name": 'USER 003',
+        "isVip": true
+    },
+    'USER0004': {
+        "name": 'USER 004',
+        "isVip": true 
+        "integral":0
+    },
+    'USER0005': {
+        "name": 'USER 005',
+        "isVip": true 
+        "integral":200
+    },
+    'USER0006': {
+        "name": 'USER 006',
+        "isVip": true 
+        "integral":201
+    },
+    'USER0007': {
+        "name": 'USER 007',
+        "isVip": true 
+        "integral":500
+    },
+    'USER0008': {
+        "name": 'USER 008',
+        "isVip": true 
+        "integral":501
+    },
+}
